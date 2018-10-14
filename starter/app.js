@@ -103,9 +103,21 @@ var UIController = (function(){
            document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
            
        },
-      getDOMSstrings : function (){
-          return DOMstrings;
-     }
+        clearFields : function(){
+           var fiels, fieldsArr;
+            fields = document.querySelectorAll(DOMstrings.inputDescription+', '+DOMstrings.inputValue);
+            
+            fieldsArr = Array.prototype.slice.call(fields);    
+            
+            fieldsArr.forEach(function(current, i, array){
+                current.value="";
+            });
+            
+            fieldsArr[0].focus();
+        },
+        getDOMSstrings : function (){
+            return DOMstrings;
+        }
     };
 
 })();
@@ -143,7 +155,7 @@ var controller = (function(budgetCtrl, UICtrl){
         UICtrl.addListItem(newItem, input.type);
         
         //4. Calculate the budget
-
+        UICtrl.clearFields();
         //5. Display the budget on the UI
     };
     return {
